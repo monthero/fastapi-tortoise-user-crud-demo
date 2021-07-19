@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:13.2-alpine
+    volumes:
+      - postgres-db-data:/var/lib/postgres13.2/data
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgres13.2/data
+    ports:
+      - 5432:5432
+    networks:
+      - default
+    restart: always
+
+  api:
+    container_name: api
+    ports:
+      - 8080:8080
+    networks:
+      - default
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres
+    build:
+      context: ./
+      dockerfile: backend.dockerfile
+    restart: always
+
+
+volumes:
+  postgres-db-data:
+
+
+networks:
+  default:
+    driver: bridge

@@ -1,0 +1,79 @@
+[tool.poetry]
+name = "crud-user-api"
+version = "0.1.0"
+description = "A basic CRUD api for a 'users' collection using FastAPI and Tortoise-ORM"
+authors = ["Vasco Monteiro <vmnokk@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = {extras = ["dotenv"], version = "^1.8.2"}
+pytest = "^6.2.4"
+tortoise-orm = {extras = ["asyncpg", "accel"], version = "^0.17.5"}
+ujson = "^4.0.2"
+requests = "^2.26.0"
+aiofiles = "^0.7.0"
+python-multipart = "^0.0.5"
+psycopg2-binary = "^2.9.1"
+gunicorn = "^20.1.0"
+uvicorn = "^0.14.0"
+DRY-python-utilities = "^1.0.0"
+fastapi = "^0.66.0"
+aerich = "^0.5.4"
+python-dotenv = "^0.18.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+Pillow = "^8.3.1"
+asynctest = "^0.13.0"
+Faker = "^8.10.1"
+
+[tool.poetry.dev-dependencies]
+black = "^21.6b0"
+isort = "^5.9.2"
+flake8 = "^3.9.2"
+pre-commit = "^2.13.0"
+autoflake = "^1.4"
+
+
+[tool.black]
+line-length = 79
+target-version = ['py39']
+include-trailing-comma = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | node_modules
+  | lib
+)/
+'''
+
+[tool.isort]
+line_length = 79
+force_grid_wrap = 0
+combine_as_imports = true
+skip = []
+multi_line_output = 3
+include_trailing_comma = true
+lines_after_imports = 2
+known_first_party = []
+known_third_party = [
+    'pydantic',
+    'PIL',
+    'fastapi',
+    'requests',
+    'tortoise',
+    'passlib',
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
